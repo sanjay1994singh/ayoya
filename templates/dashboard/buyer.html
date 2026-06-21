@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="dashboard">
+  <h1>Buyer dashboard</h1>
+  <h2>Saved properties</h2>
+  <div class="property-grid">
+    {% for favorite in favorites %}
+      {% with property=favorite.property %}{% include "properties/_card.html" %}{% endwith %}
+    {% empty %}
+      <p class="empty">No saved properties yet.</p>
+    {% endfor %}
+  </div>
+  <h2>Your inquiries</h2>
+  {% include "dashboard/_inquiries.html" %}
+</section>
+{% endblock %}

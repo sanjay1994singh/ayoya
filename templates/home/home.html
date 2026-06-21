@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">Verified homes, plots, rentals, and agents</p>
+    <h1>Ayoya Realestate</h1>
+    <p>Find your next property, publish owner listings, manage agent leads, and connect with serious buyers from one dashboard.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="{% url 'properties:list' %}">Browse properties</a>
+      <a class="btn secondary" href="{% url 'properties:create' %}">List property</a>
+    </div>
+  </div>
+  <form class="search-panel" method="get" action="{% url 'properties:list' %}">
+    <input name="q" placeholder="Search locality, project, city">
+    <select name="purpose">
+      <option value="">Buy or rent</option>
+      <option value="sale">For sale</option>
+      <option value="rent">For rent</option>
+      <option value="lease">For lease</option>
+    </select>
+    <input name="city" placeholder="City">
+    <button type="submit">Search</button>
+  </form>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Featured properties</h2>
+    <a href="{% url 'properties:list' %}">View all</a>
+  </div>
+  <div class="property-grid">
+    {% for property in featured %}
+      {% include "properties/_card.html" %}
+    {% empty %}
+      <p class="empty">Add featured properties from admin or your dashboard to show them here.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section muted">
+  <div class="section-head">
+    <h2>Explore categories</h2>
+  </div>
+  <div class="category-grid">
+    {% for category in categories %}
+      <a class="category-tile" href="{{ category.get_absolute_url }}">
+        <strong>{{ category.name }}</strong>
+        <span>{{ category.description|truncatewords:12 }}</span>
+      </a>
+    {% empty %}
+      <p class="empty">Create property categories like Apartment, Villa, Plot, Office, and Shop.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Latest listings</h2>
+  </div>
+  <div class="property-grid">
+    {% for property in latest %}
+      {% include "properties/_card.html" %}
+    {% empty %}
+      <p class="empty">No published listings yet.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

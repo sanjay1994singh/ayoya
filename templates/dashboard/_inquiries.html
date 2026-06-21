@@ -1,0 +1,17 @@
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Property</th><th>Name</th><th>Phone</th><th>Message</th></tr></thead>
+    <tbody>
+      {% for inquiry in inquiries %}
+        <tr>
+          <td>{{ inquiry.property.title }}</td>
+          <td>{{ inquiry.name }}</td>
+          <td>{{ inquiry.phone }}</td>
+          <td>{{ inquiry.message|truncatewords:12 }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="4">No inquiries yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

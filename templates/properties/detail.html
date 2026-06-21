@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="property-detail">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    "name": "{{ property.title|escapejs }}",
+    "url": "{{ ABSOLUTE_ROOT }}{{ property.get_absolute_url }}",
+    "address": "{{ property.address|escapejs }}, {{ property.city|escapejs }}, {{ property.state|escapejs }}",
+    "datePosted": "{{ property.created_at|date:'c' }}"
+  }
+  </script>
+  <div class="detail-hero">
+    {% if property.main_image %}<img src="{{ property.main_image.url }}" alt="{{ property.title }}">{% endif %}
+    <div>
+      <p class="eyebrow">{{ property.get_purpose_display }} · {{ property.get_property_type_display }}</p>
+      <h1>{{ property.title }}</h1>
+      <p>{{ property.address }}, {{ property.city }}, {{ property.state }}</p>
+      <strong class="price">₹{{ property.price }} {{ property.price_label }}</strong>
+      <form method="post" action="{% url 'properties:favorite' property.slug %}">{% csrf_token %}<button type="submit">{{ is_favorite|yesno:"Remove favorite,Save property" }}</button></form>
+    </div>
+  </div>
+  <div class="detail-grid">
+    <section>
+      <h2>Overview</h2>
+      <div class="stats">
+        <span>{{ property.area_sqft|default:"-" }} sqft</span>
+        <span>{{ property.bedrooms }} beds</span>
+        <span>{{ property.bathrooms }} baths</span>
+        <span>{{ property.parking_spaces }} parking</span>
+      </div>
+      <div class="rich-text">{{ property.description|safe }}</div>
+      <h2>Amenities</h2>
+      <div class="chips">{% for amenity in property.amenities.all %}<span>{{ amenity.name }}</span>{% empty %}<span>No amenities added</span>{% endfor %}</div>
+    </section>
+    <aside class="inquiry-box">
+      <h2>Contact owner</h2>
+      <p>{{ property.owner.get_full_name|default:property.owner.username }} · {{ property.owner.get_user_type_display }}</p>
+      <form method="post">
+        {% csrf_token %}
+        {{ inquiry_form.as_p }}
+        <button type="submit">Send inquiry</button>
+      </form>
+    </aside>
+  </div>
+</article>
+{% endblock %}

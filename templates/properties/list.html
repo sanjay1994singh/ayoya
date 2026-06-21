@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="listing-page">
+  <div class="section-head">
+    <h1>{{ title }}</h1>
+    <a class="btn primary" href="{% url 'properties:create' %}">Add property</a>
+  </div>
+  <form method="get" class="filters">
+    {{ form.as_p }}
+    <button type="submit">Filter</button>
+  </form>
+  <div class="property-grid">
+    {% for property in page_obj %}
+      {% include "properties/_card.html" %}
+    {% empty %}
+      <p class="empty">No matching properties found.</p>
+    {% endfor %}
+  </div>
+  {% if page_obj.paginator.num_pages > 1 %}
+    <nav class="pagination">
+      {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">Previous</a>{% endif %}
+      <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+      {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Next</a>{% endif %}
+    </nav>
+  {% endif %}
+</section>
+{% endblock %}

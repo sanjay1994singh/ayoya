@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="profile-head">
+  {% if profile_user.display_avatar %}<img src="{{ profile_user.display_avatar }}" alt="{{ profile_user.get_full_name|default:profile_user.username }}">{% endif %}
+  <div>
+    <p class="eyebrow">{{ profile_user.get_user_type_display }}</p>
+    <h1>{{ profile_user.get_full_name|default:profile_user.username }}</h1>
+    <p>{{ profile_user.bio|default:"Real estate member on Ayoya Realestate." }}</p>
+    <p>{{ profile_user.city }} {{ profile_user.state }}</p>
+  </div>
+</section>
+<section class="section">
+  <h2>Listings</h2>
+  <div class="property-grid">
+    {% for property in properties %}
+      {% include "properties/_card.html" %}
+    {% empty %}
+      <p class="empty">No published listings.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

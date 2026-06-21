@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="content-page">
+  <h1>{{ title }}</h1>
+  <form method="post" enctype="multipart/form-data" class="form-grid">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <button type="submit">Save property</button>
+  </form>
+</section>
+{% endblock %}

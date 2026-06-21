@@ -1,0 +1,15 @@
+<article class="property-card">
+  <a href="{{ property.get_absolute_url }}" class="property-media">
+    {% if property.main_image %}
+      <img src="{{ property.main_image.url }}" alt="{{ property.title }}">
+    {% else %}
+      <div class="image-placeholder">{{ property.property_type|title }}</div>
+    {% endif %}
+  </a>
+  <div class="property-body">
+    <p class="property-meta">{{ property.get_purpose_display }} · {{ property.city }}</p>
+    <h3><a href="{{ property.get_absolute_url }}">{{ property.title }}</a></h3>
+    <p>{{ property.short_description|default:property.address|truncatewords:16 }}</p>
+    <strong>₹{{ property.price }} {% if property.price_label %}<span>{{ property.price_label }}</span>{% endif %}</strong>
+  </div>
+</article>
