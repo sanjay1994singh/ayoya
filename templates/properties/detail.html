@@ -1,4 +1,17 @@
 {% extends "base.html" %}
+{% block extra_seo %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ ABSOLUTE_ROOT }}{% url 'home:home' %}"},
+    {"@type": "ListItem", "position": 2, "name": "Properties", "item": "{{ ABSOLUTE_ROOT }}{% url 'properties:list' %}"},
+    {"@type": "ListItem", "position": 3, "name": "{{ property.title|escapejs }}", "item": "{{ ABSOLUTE_ROOT }}{{ property.get_absolute_url }}"}
+  ]
+}
+</script>
+{% endblock %}
 {% block content %}
 <article class="property-detail">
   <script type="application/ld+json">
@@ -8,17 +21,31 @@
     "name": "{{ property.title|escapejs }}",
     "url": "{{ ABSOLUTE_ROOT }}{{ property.get_absolute_url }}",
     "address": "{{ property.address|escapejs }}, {{ property.city|escapejs }}, {{ property.state|escapejs }}",
+    {% if property.main_image %}"image": "{{ ABSOLUTE_ROOT }}{{ property.main_image.url }}",{% endif %}
+    "offers": {
+      "@type": "Offer",
+      "price": "{{ property.price }}",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock"
+    },
     "datePosted": "{{ property.created_at|date:'c' }}"
   }
   </script>
   <div class="detail-hero">
     {% if property.main_image %}<img src="{{ property.main_image.url }}" alt="{{ property.title }}">{% endif %}
     <div>
-      <p class="eyebrow">{{ property.get_purpose_display }} · {{ property.get_property_type_display }}</p>
+      <p class="eyebrow">{{ property.get_purpose_display }} &middot; {{ property.get_property_type_display }}</p>
       <h1>{{ property.title }}</h1>
       <p>{{ property.address }}, {{ property.city }}, {{ property.state }}</p>
-      <strong class="price">₹{{ property.price }} {{ property.price_label }}</strong>
-      <form method="post" action="{% url 'properties:favorite' property.slug %}">{% csrf_token %}<button type="submit">{{ is_favorite|yesno:"Remove favorite,Save property" }}</button></form>
+      <strong class="price">&#8377;{{ property.price }} {{ property.price_label }}</strong>
+      <div class="detail-actions">
+        {% if user == property.owner %}
+          <a class="btn primary" href="{% url 'properties:edit' property.slug %}">Edit property</a>
+          <a class="btn secondary" href="{% url 'dashboard:home' %}">Dashboard</a>
+        {% else %}
+          <form method="post" action="{% url 'properties:favorite' property.slug %}">{% csrf_token %}<button type="submit">{{ is_favorite|yesno:"Remove favorite,Save property" }}</button></form>
+        {% endif %}
+      </div>
     </div>
   </div>
   <div class="detail-grid">
@@ -36,7 +63,7 @@
     </section>
     <aside class="inquiry-box">
       <h2>Contact owner</h2>
-      <p>{{ property.owner.get_full_name|default:property.owner.username }} · {{ property.owner.get_user_type_display }}</p>
+      <p>{{ property.owner.get_full_name|default:property.owner.username }} &middot; {{ property.owner.get_user_type_display }}</p>
       <form method="post">
         {% csrf_token %}
         {{ inquiry_form.as_p }}

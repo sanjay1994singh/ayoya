@@ -1,7 +1,18 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from social_django.models import Association, Nonce, Partial, UserSocialAuth
 
 from .models import User
+
+admin.site.site_header = "Ayoya Realestate Admin"
+admin.site.site_title = "Ayoya Realestate"
+admin.site.index_title = "Ayoya Realestate Management"
+
+for model in (Association, Nonce, Partial, UserSocialAuth):
+    try:
+        admin.site.unregister(model)
+    except admin.sites.NotRegistered:
+        pass
 
 
 @admin.register(User)

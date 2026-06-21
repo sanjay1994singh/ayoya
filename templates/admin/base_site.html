@@ -1,0 +1,28 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | Ayoya Realestate Admin{% endblock %}
+
+{% block branding %}
+<div id="site-name">
+  <a href="{% url 'admin:index' %}">Ayoya Realestate Admin</a>
+</div>
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}
+<style>
+  #header {
+    background: #116149;
+    color: #fff;
+  }
+  #branding #site-name a {
+    color: #fff;
+    font-weight: 800;
+  }
+  .module h2, .module caption, .inline-group h2 {
+    background: #255f85;
+  }
+  div.breadcrumbs {
+    background: #0f4f3d;
+  }
+</style>
+{% endblock %}

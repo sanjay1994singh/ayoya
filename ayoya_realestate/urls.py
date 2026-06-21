@@ -5,10 +5,11 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 
 from home.sitemaps import StaticViewSitemap
-from properties.sitemaps import PropertySitemap
+from properties.sitemaps import CategorySitemap, PropertySitemap
 
 sitemaps = {
     "static": StaticViewSitemap,
+    "categories": CategorySitemap,
     "properties": PropertySitemap,
 }
 

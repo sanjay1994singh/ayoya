@@ -47,11 +47,32 @@ def property_list(request, slug=None):
     paginator = Paginator(properties, 12)
     page_obj = paginator.get_page(request.GET.get("page"))
     title = f"{category.name} Properties" if category else "Properties"
-    return render(request, "properties/list.html", {"page_obj": page_obj, "form": form, "category": category, "title": title})
+    meta_description = (
+        f"Browse verified {category.name.lower()} listings on Ayoya Realestate with prices, locations, amenities, owners, and agents."
+        if category
+        else "Browse verified property listings on Ayoya Realestate including apartments, villas, plots, shops, offices, rentals, and sale properties."
+    )
+    return render(
+        request,
+        "properties/list.html",
+        {
+            "page_obj": page_obj,
+            "form": form,
+            "category": category,
+            "title": title,
+            "meta_description": meta_description,
+            "meta_keywords": f"{title}, Ayoya Realestate, verified property, buy property, rent property",
+        },
+    )
 
 
 def property_detail(request, slug):
-    property_obj = get_object_or_404(Property.objects.select_related("owner", "category").prefetch_related("amenities", "images"), slug=slug, status=Property.Status.PUBLISHED)
+    properties = Property.objects.select_related("owner", "category").prefetch_related("amenities", "images")
+    if request.user.is_authenticated:
+        properties = properties.filter(Q(status=Property.Status.PUBLISHED) | Q(owner=request.user))
+    else:
+        properties = properties.filter(status=Property.Status.PUBLISHED)
+    property_obj = get_object_or_404(properties, slug=slug)
     Property.objects.filter(pk=property_obj.pk).update(views_count=property_obj.views_count + 1, updated_at=timezone.now())
     inquiry_form = InquiryForm(request.POST or None)
     review_form = ReviewForm()
@@ -67,7 +88,17 @@ def property_detail(request, slug):
     return render(
         request,
         "properties/detail.html",
-        {"property": property_obj, "inquiry_form": inquiry_form, "review_form": review_form, "is_favorite": is_favorite},
+        {
+            "property": property_obj,
+            "inquiry_form": inquiry_form,
+            "review_form": review_form,
+            "is_favorite": is_favorite,
+            "title": property_obj.meta_title or property_obj.title,
+            "meta_description": property_obj.meta_description,
+            "meta_keywords": f"{property_obj.title}, {property_obj.city} property, {property_obj.locality}, {property_obj.get_purpose_display()}, Ayoya Realestate",
+            "og_type": "product",
+            "og_image": property_obj.main_image.url if property_obj.main_image else "",
+        },
     )
 
 
@@ -81,7 +112,7 @@ def property_create(request):
             property_obj.save()
             form.save_m2m()
             messages.success(request, "Property created.")
-            return redirect(property_obj.get_absolute_url())
+            return redirect(property_obj.get_absolute_url() if property_obj.status == Property.Status.PUBLISHED else "dashboard:home")
     else:
         form = PropertyForm()
     return render(request, "properties/form.html", {"form": form, "title": "Add property"})
@@ -95,7 +126,7 @@ def property_edit(request, slug):
         if form.is_valid():
             property_obj = form.save()
             messages.success(request, "Property updated.")
-            return redirect(property_obj.get_absolute_url())
+            return redirect(property_obj.get_absolute_url() if property_obj.status == Property.Status.PUBLISHED else "dashboard:home")
     else:
         form = PropertyForm(instance=property_obj)
     return render(request, "properties/form.html", {"form": form, "title": "Edit property"})

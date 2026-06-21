@@ -1,6 +1,17 @@
 from django.contrib.sitemaps import Sitemap
 
-from .models import Property
+from .models import Category, Property
+
+
+class CategorySitemap(Sitemap):
+    changefreq = "weekly"
+    priority = 0.6
+
+    def items(self):
+        return Category.objects.filter(is_active=True)
+
+    def lastmod(self, obj):
+        return obj.updated_at
 
 
 class PropertySitemap(Sitemap):
