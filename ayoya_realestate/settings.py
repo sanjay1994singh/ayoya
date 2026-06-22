@@ -35,6 +35,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "home.middleware.CanonicalHostMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -87,13 +88,17 @@ DATABASES = {
 AUTH_USER_MODEL = "accounts.User"
 
 AUTHENTICATION_BACKENDS = (
-    "social_core.backends.google.GoogleOAuth2",
+    "accounts.backends.AyoyaGoogleOAuth2",
     "django.contrib.auth.backends.ModelBackend",
 )
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_OAUTH2_KEY", "")
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv("GOOGLE_OAUTH2_SECRET", "")
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ["email", "profile"]
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY", os.getenv("GOOGLE_OAUTH2_KEY", ""))
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET", os.getenv("GOOGLE_OAUTH2_SECRET", ""))
+SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = os.getenv(
+    "SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI",
+    f"{os.getenv('SITE_SCHEME', 'https')}://{os.getenv('SITE_DOMAIN', 'ayoyagroup.com')}/auth/complete/google-oauth2/",
+)
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = []
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = os.getenv("SOCIAL_AUTH_REDIRECT_IS_HTTPS", "True").lower() == "true"
 SOCIAL_AUTH_PIPELINE = (
     "social_core.pipeline.social_auth.social_details",

@@ -20,7 +20,8 @@ urlpatterns = [
     path("dashboard/", include("accounts.dashboard_urls")),
     path("properties/", include("properties.urls")),
     path("ckeditor5/", include("django_ckeditor_5.urls")),
-    path("oauth/", include("social_django.urls", namespace="social")),
+    path("auth/", include("social_django.urls", namespace="social")),
+    path("oauth/", include("social_django.urls", namespace="legacy_social")),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap"),
 ]
 
