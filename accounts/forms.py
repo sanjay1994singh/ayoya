@@ -24,8 +24,32 @@ class RegisterForm(UserCreationForm):
             "password2",
         )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            "username": "Choose username",
+            "first_name": "First name",
+            "last_name": "Last name",
+            "email": "Email address",
+            "phone": "Phone number",
+            "city": "City",
+            "preferred_location": "Preferred location",
+            "password1": "Password",
+            "password2": "Confirm password",
+        }
+        for name, field in self.fields.items():
+            field.widget.attrs["class"] = "form-control"
+            if name in placeholders:
+                field.widget.attrs["placeholder"] = placeholders[name]
+        self.fields["accepts_terms"].widget.attrs["class"] = "form-check-input"
+
 
 class ProfileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"
+
     class Meta:
         model = User
         fields = (

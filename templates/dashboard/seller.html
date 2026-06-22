@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 <section class="dashboard">
-  <div class="section-head"><h1>Seller / owner dashboard</h1><a class="btn primary" href="{% url 'properties:create' %}">List property</a></div>
+  <div class="section-head"><div><p class="eyebrow">Workspace</p><h1>Seller / owner dashboard</h1></div><a class="btn primary" href="{% url 'properties:create' %}">List property</a></div>
+  <h2>Your properties</h2>
   {% include "dashboard/_property_table.html" %}
+  <h2>Recent inquiries</h2>
   {% include "dashboard/_inquiries.html" %}
 </section>
 {% endblock %}

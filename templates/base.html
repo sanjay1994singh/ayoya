@@ -47,8 +47,13 @@
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="{% url 'home:home' %}">Ayoya <span>Realestate</span></a>
-    <nav>
+    <div class="header-inner">
+      <a class="brand" href="{% url 'home:home' %}">Ayoya <span>Realestate</span></a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="site-nav">
       <a href="{% url 'properties:list' %}">Properties</a>
       <a href="{% url 'home:about' %}">About</a>
       <a href="{% url 'home:contact' %}">Contact</a>
@@ -73,5 +78,6 @@
   <footer class="site-footer">
     <p>&copy; {% now "Y" %} {{ SITE_NAME }}. Verified property marketplace for buyers, sellers, owners, and agents.</p>
   </footer>
+  <script src="{% static 'js/site.js' %}"></script>
 </body>
 </html>

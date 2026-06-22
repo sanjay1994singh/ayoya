@@ -6,7 +6,13 @@
     <a class="btn primary" href="{% url 'properties:create' %}">Add property</a>
   </div>
   <form method="get" class="filters">
-    {{ form.as_p }}
+    <div class="field">{{ form.q.label_tag }}{{ form.q }}</div>
+    <div class="field">{{ form.purpose.label_tag }}{{ form.purpose }}</div>
+    <div class="field">{{ form.property_type.label_tag }}{{ form.property_type }}</div>
+    <div class="field">{{ form.city.label_tag }}{{ form.city }}</div>
+    <div class="field">{{ form.min_price.label_tag }}{{ form.min_price }}</div>
+    <div class="field">{{ form.max_price.label_tag }}{{ form.max_price }}</div>
+    <div class="field">{{ form.bedrooms.label_tag }}{{ form.bedrooms }}</div>
     <button type="submit">Filter</button>
   </form>
   <div class="property-grid">

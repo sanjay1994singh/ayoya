@@ -53,4 +53,18 @@
         {% endfor %}
     </div>
 </section>
+
+<section class="section">
+    <div class="section-head">
+        <h2>Latest listings</h2>
+        <a href="{% url 'properties:list' %}">Browse all</a>
+    </div>
+    <div class="property-grid">
+        {% for property in latest %}
+        {% include "properties/_card.html" %}
+        {% empty %}
+        <p class="empty">No published listings yet.</p>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}

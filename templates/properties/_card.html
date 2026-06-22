@@ -5,11 +5,17 @@
     {% else %}
       <div class="image-placeholder">{{ property.property_type|title }}</div>
     {% endif %}
+    {% if property.is_verified %}<span class="card-badge">Verified</span>{% endif %}
   </a>
   <div class="property-body">
-    <p class="property-meta">{{ property.get_purpose_display }} · {{ property.city }}</p>
+    <p class="property-meta">{{ property.get_purpose_display }} &middot; {{ property.city }}</p>
     <h3><a href="{{ property.get_absolute_url }}">{{ property.title }}</a></h3>
     <p>{{ property.short_description|default:property.address|truncatewords:16 }}</p>
-    <strong>₹{{ property.price }} {% if property.price_label %}<span>{{ property.price_label }}</span>{% endif %}</strong>
+    <div class="card-facts">
+      {% if property.area_sqft %}<span>{{ property.area_sqft }} sqft</span>{% endif %}
+      {% if property.bedrooms %}<span>{{ property.bedrooms }} beds</span>{% endif %}
+      {% if property.bathrooms %}<span>{{ property.bathrooms }} baths</span>{% endif %}
+    </div>
+    <strong>&#8377;{{ property.price }} {% if property.price_label %}<span>{{ property.price_label }}</span>{% endif %}</strong>
   </div>
 </article>

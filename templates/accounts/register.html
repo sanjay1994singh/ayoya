@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 <section class="auth-shell">
-  <h1>Create account</h1>
-  <form method="post" enctype="multipart/form-data" class="form-card">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create account</button>
-  </form>
-  <a class="social-login" href="{% url 'social:begin' 'google-oauth2' %}">Continue with Google</a>
+  <div class="auth-card wide">
+    <p class="eyebrow">Join Ayoya Realestate</p>
+    <h1>Create account</h1>
+    <a class="social-login" href="{% url 'social:begin' 'google-oauth2' %}">Continue with Google</a>
+    <div class="auth-divider"><span>or</span></div>
+    <form method="post" enctype="multipart/form-data" class="form-card form-card-grid">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Create account</button>
+    </form>
+  </div>
 </section>
 {% endblock %}
