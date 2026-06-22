@@ -100,6 +100,26 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = os.getenv(
 )
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = []
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = os.getenv("SOCIAL_AUTH_REDIRECT_IS_HTTPS", "True").lower() == "true"
+SOCIAL_AUTH_IMMUTABLE_USER_FIELDS = (
+    "first_name",
+    "last_name",
+    "email",
+    "phone",
+    "alternate_phone",
+    "profile_image",
+    "bio",
+    "company_name",
+    "license_number",
+    "website",
+    "address",
+    "city",
+    "state",
+    "country",
+    "postal_code",
+    "preferred_location",
+    "min_budget",
+    "max_budget",
+)
 SOCIAL_AUTH_PIPELINE = (
     "social_core.pipeline.social_auth.social_details",
     "social_core.pipeline.social_auth.social_uid",
@@ -110,7 +130,6 @@ SOCIAL_AUTH_PIPELINE = (
     "accounts.pipeline.save_social_profile",
     "social_core.pipeline.social_auth.associate_user",
     "social_core.pipeline.social_auth.load_extra_data",
-    "social_core.pipeline.user.user_details",
 )
 
 LOGIN_URL = "accounts:login"
