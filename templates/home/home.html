@@ -1,25 +1,40 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-<section class="hero">
-    <div>
-        <p class="eyebrow">Verified homes, plots, rentals, and agents</p>
-        <h1>Ayoya Realestate</h1>
-        <p>Find your next property, publish owner listings, manage agent leads, and connect with serious buyers from one
-            dashboard.</p>
+<section class="brand-hero">
+    <div class="brand-hero-media">
+        <img src="{% static 'images/ayoya-group-banner.jpeg' %}" alt="AYOYA GROUP real estate channel partner banner">
+    </div>
+    <div class="brand-hero-content">
+        <p class="eyebrow">Your trusted real estate channel partner</p>
+        <h1>AYOYA GROUP</h1>
+        <p>Residential plots, commercial plots, flats, and investment properties in Vrindavan, Mathura, Barsana, Goverdhan, and Radha Kund.</p>
         <div class="hero-actions">
-            <a class="btn primary" href="{% url 'properties:list' %}">Browse properties</a>
-            <a class="btn secondary" href="{% url 'properties:create' %}">List property</a>
+            <a class="btn primary" href="{% url 'properties:list' %}">Explore properties</a>
+            <a class="btn secondary" href="{% url 'home:contact' %}">Contact AYOYA</a>
         </div>
     </div>
-    <form class="search-panel" method="get" action="{% url 'properties:list' %}">
-        <input name="q" placeholder="Search locality, project, city">
-        <select name="purpose">
-            <option value="">Buy or rent</option>
-            <option value="sale">For sale</option>
-            <option value="rent">For rent</option>
-            <option value="lease">For lease</option>
-        </select>
-        <input name="city" placeholder="City">
+</section>
+
+<section class="quick-search-wrap">
+    <form class="quick-search-panel" method="get" action="{% url 'properties:list' %}">
+        <div>
+            <label for="home-search-q">Search property</label>
+            <input id="home-search-q" name="q" placeholder="Vrindavan plot, Mathura flat, commercial space">
+        </div>
+        <div>
+            <label for="home-search-purpose">Purpose</label>
+            <select id="home-search-purpose" name="purpose">
+                <option value="">Buy or rent</option>
+                <option value="sale">For sale</option>
+                <option value="rent">For rent</option>
+                <option value="lease">For lease</option>
+            </select>
+        </div>
+        <div>
+            <label for="home-search-city">Location</label>
+            <input id="home-search-city" name="city" placeholder="Vrindavan, Mathura, Barsana">
+        </div>
         <button type="submit">Search</button>
     </form>
 </section>

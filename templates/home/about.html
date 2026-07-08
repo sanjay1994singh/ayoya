@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block extra_seo %}
 <script type="application/ld+json">
 {
@@ -32,6 +33,7 @@
     </div>
   </div>
   <div class="info-card">
+    <img class="info-card-banner" src="{% static 'images/ayoya-group-banner.jpeg' %}" alt="AYOYA GROUP banner">
     <strong>Independent Channel Partner</strong>
     <span>Trusted guidance for residential plots, commercial plots, flats, and investment properties.</span>
   </div>

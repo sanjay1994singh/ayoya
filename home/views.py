@@ -14,8 +14,9 @@ def home(request):
         "latest": latest,
         "categories": categories,
         "title": "Ayoya Realestate - Buy, Sell, Rent Properties",
-        "meta_description": "Find verified homes, apartments, plots, commercial spaces, and real estate agents on Ayoya Realestate.",
-        "meta_keywords": "Ayoya Realestate, buy property, rent property, sell property, verified real estate, agents, homes, plots, apartments",
+        "meta_description": "AYOYA GROUP is your trusted real estate channel partner for residential plots, commercial plots, flats, and investment properties in Vrindavan, Mathura, Barsana, Goverdhan, and Radha Kund.",
+        "meta_keywords": "AYOYA GROUP, Ayoya Realestate, Vrindavan property, Mathura property, Goverdhan property, Barsana property, Radha Kund property, real estate channel partner",
+        "og_image": "/static/images/ayoya-group-banner.jpeg",
     }
     return render(request, "home/home.html", context)
 
