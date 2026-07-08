@@ -1,14 +1,62 @@
 {% extends "base.html" %}
+{% block extra_seo %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact AYOYA GROUP",
+  "url": "{{ ABSOLUTE_ROOT }}{% url 'home:contact' %}",
+  "mainEntity": {
+    "@type": "RealEstateAgent",
+    "name": "AYOYA GROUP",
+    "email": "ayoyarealestate@gmail.com",
+    "telephone": "+917599049094",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "BSA Engineering College Road",
+      "addressLocality": "Mathura",
+      "addressRegion": "Uttar Pradesh",
+      "addressCountry": "IN"
+    }
+  }
+}
+</script>
+{% endblock %}
 {% block content %}
-<section class="content-page">
-  <div class="section-head">
-    <div>
-      <p class="eyebrow">Contact</p>
-      <h1>Contact Ayoya Realestate</h1>
-    </div>
+<section class="info-hero contact-hero">
+  <div>
+    <p class="eyebrow">Contact Us</p>
+    <h1>Connect with AYOYA GROUP</h1>
+    <p>Reach out for property guidance in Vrindavan, Mathura, Barsana, Goverdhan, and nearby areas.</p>
   </div>
-  <div class="text-panel">
-    <p>Use property inquiry forms to contact listing owners directly. Site-wide contact integration can be connected to email or CRM next.</p>
+</section>
+
+<section class="content-page info-page">
+  <div class="contact-grid">
+    <a class="contact-card" href="mailto:ayoyarealestate@gmail.com">
+      <span>E-mail</span>
+      <strong>ayoyarealestate@gmail.com</strong>
+    </a>
+    <a class="contact-card" href="tel:+917599049094">
+      <span>Mobile</span>
+      <strong>7599049094</strong>
+    </a>
+    <a class="contact-card" href="https://www.google.com/maps/search/?api=1&query=BSA%20Engineering%20College%20Road%20Mathura" target="_blank" rel="noopener">
+      <span>Address</span>
+      <strong>BSA Engineering College Road, Mathura</strong>
+    </a>
+  </div>
+
+  <div class="split-content contact-split">
+    <div class="text-panel feature-panel">
+      <p>AYOYA GROUP assists customers with genuine property options, transparent guidance, and support from inquiry to booking.</p>
+      <p>Contact us for residential plots, commercial plots, flats, and investment property options in Mathura, Vrindavan, Barsana, Goverdhan, and nearby areas.</p>
+    </div>
+    <div class="info-card contact-note">
+      <strong>Office location</strong>
+      <span>BSA Engineering College Road, Mathura</span>
+      <a class="btn primary" href="tel:+917599049094">Call now</a>
+    </div>
   </div>
 </section>
 {% endblock %}

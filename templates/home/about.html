@@ -1,15 +1,68 @@
 {% extends "base.html" %}
+{% block extra_seo %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "AYOYA GROUP",
+  "url": "{{ ABSOLUTE_ROOT }}{% url 'home:about' %}",
+  "email": "ayoyarealestate@gmail.com",
+  "telephone": "+917599049094",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "BSA Engineering College Road",
+    "addressLocality": "Mathura",
+    "addressRegion": "Uttar Pradesh",
+    "addressCountry": "IN"
+  },
+  "areaServed": ["Vrindavan", "Mathura", "Barsana", "Goverdhan"],
+  "description": "AYOYA GROUP is an independent real estate channel partner helping customers buy genuine property options with transparent guidance."
+}
+</script>
+{% endblock %}
 {% block content %}
-<section class="content-page">
-  <div class="section-head">
-    <div>
-      <p class="eyebrow">About</p>
-      <h1>Ayoya Realestate</h1>
+<section class="info-hero about-hero">
+  <div>
+    <p class="eyebrow">About Us</p>
+    <h1>AYOYA GROUP</h1>
+    <p>Real Estate Channel Partner based in Vrindavan, helping customers buy the right property with confidence.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="{% url 'home:contact' %}">Contact us</a>
+      <a class="btn secondary" href="{% url 'properties:list' %}">Explore properties</a>
     </div>
   </div>
-  <div class="text-panel">
-    <p>Ayoya Realestate helps buyers, sellers, owners, and agents publish verified property information, manage inquiries, and build trusted real estate profiles.</p>
-    <p>Every listing can include pricing, amenities, rich descriptions, images, SEO fields, and direct inquiry tools.</p>
+  <div class="info-card">
+    <strong>Independent Channel Partner</strong>
+    <span>Trusted guidance for residential plots, commercial plots, flats, and investment properties.</span>
+  </div>
+</section>
+
+<section class="content-page info-page">
+  <div class="split-content">
+    <div class="text-panel feature-panel">
+      <p>AYOYA GROUP is a Real Estate Channel Partner based in Vrindavan, dedicated to helping customers buy the right property with confidence.</p>
+      <p>We assist clients in finding residential plots, commercial plots, flats, and investment properties in Vrindavan, Mathura, Barsana, Goverdhan, and nearby areas. We work with trusted developers and verified projects to provide genuine property options and transparent guidance.</p>
+      <p>Our goal is to make the property buying process simple, honest, and hassle-free by offering reliable support from inquiry to booking.</p>
+    </div>
+    <div class="highlight-list">
+      <div><strong>Residential plots</strong><span>Verified options for families and investors.</span></div>
+      <div><strong>Commercial plots</strong><span>Location-focused guidance for business needs.</span></div>
+      <div><strong>Flats</strong><span>Developer-backed options with clear information.</span></div>
+      <div><strong>Investment property</strong><span>Transparent support from inquiry to booking.</span></div>
+    </div>
+  </div>
+
+  <div class="area-strip">
+    <span>Vrindavan</span>
+    <span>Mathura</span>
+    <span>Barsana</span>
+    <span>Goverdhan</span>
+    <span>Nearby areas</span>
+  </div>
+
+  <div class="notice-panel">
+    <strong>Important note</strong>
+    <p>AYOYA GROUP is an independent Real Estate Channel Partner. We are not a builder or developer and only assist in the sale of properties offered by developers.</p>
   </div>
 </section>
 {% endblock %}

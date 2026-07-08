@@ -25,8 +25,9 @@ def about(request):
         request,
         "home/about.html",
         {
-            "title": "About Ayoya Realestate",
-            "meta_description": "Learn about Ayoya Realestate, a verified property marketplace for buyers, sellers, owners, and agents.",
+            "title": "About AYOYA GROUP - Real Estate Channel Partner in Vrindavan",
+            "meta_description": "AYOYA GROUP is an independent real estate channel partner helping customers buy residential plots, commercial plots, flats, and investment properties in Vrindavan, Mathura, Barsana, Goverdhan, and nearby areas.",
+            "meta_keywords": "AYOYA GROUP, Ayoya Realestate, real estate channel partner Vrindavan, property in Mathura, plots in Vrindavan, flats in Mathura, Barsana property, Goverdhan property",
         },
     )
 
@@ -36,8 +37,9 @@ def contact(request):
         request,
         "home/contact.html",
         {
-            "title": "Contact Ayoya Realestate",
-            "meta_description": "Contact Ayoya Realestate property owners and agents for verified homes, plots, rentals, and commercial listings.",
+            "title": "Contact AYOYA GROUP - Real Estate in Mathura and Vrindavan",
+            "meta_description": "Contact AYOYA GROUP for residential plots, commercial plots, flats, and investment property guidance in Vrindavan, Mathura, Barsana, Goverdhan, and nearby areas.",
+            "meta_keywords": "contact AYOYA GROUP, Ayoya Realestate phone, ayoyarealestate@gmail.com, Mathura real estate, Vrindavan property advisor",
         },
     )
 
