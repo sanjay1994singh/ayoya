@@ -22,6 +22,7 @@ body {
   color: var(--ink);
   background: #f7faf9;
   line-height: 1.55;
+  overflow-x: hidden;
 }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
@@ -498,6 +499,8 @@ input[type="file"] { padding: 8px; background: #fff; }
 .form-actions button, .form-actions .btn { min-width: 170px; }
 
 .detail-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .7fr); gap: 28px; align-items: center; }
+.detail-hero h1 { margin: 8px 0 14px; font-size: clamp(2rem, 3.2vw, 3.25rem); line-height: 1.2; overflow-wrap: anywhere; }
+.detail-hero p, .detail-hero strong { overflow-wrap: anywhere; }
 .detail-main-image { display: grid; place-items: center; width: 100%; border-radius: 8px; overflow: hidden; background: #eef3f1; box-shadow: var(--shadow); }
 .detail-main-image--landscape { aspect-ratio: 16 / 10; }
 .detail-main-image--portrait { aspect-ratio: 4 / 5; max-height: 76vh; }
@@ -508,7 +511,10 @@ input[type="file"] { padding: 8px; background: #fff; }
 .detail-grid > section, .inquiry-box { min-width: 0; }
 .stats, .chips { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0; }
 .stats span, .chips span { border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; background: white; }
-.rich-text { overflow-wrap: anywhere; }
+.rich-text { overflow-wrap: anywhere; font-size: 1rem; line-height: 1.75; }
+.rich-text h2, .rich-text h3, .rich-text h4 { line-height: 1.25; margin: 1.35em 0 .55em; }
+.rich-text p { margin: 0 0 1em; }
+.rich-text ul, .rich-text ol { padding-left: 1.4rem; }
 .rich-text img { height: auto !important; max-width: 100%; }
 .property-gallery { margin-top: 32px; }
 .gallery-grid { display: grid; gap: 14px; margin-top: 14px; }
@@ -539,6 +545,7 @@ td a { color: var(--green); font-weight: 800; }
   .profile-form p:has(textarea), .profile-form button { grid-column: span 2; }
   .form-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .span-3, .span-4 { grid-column: span 2; }
+  .detail-main-image { width: min(100%, 760px); margin-inline: auto; }
 }
 
 @media (max-width: 760px) {
@@ -562,12 +569,25 @@ td a { color: var(--green); font-weight: 800; }
   .form-card-grid, .filters, .profile-form { grid-template-columns: 1fr; }
   .form-card-grid p:last-of-type, .form-card-grid button, .profile-form p:has(textarea), .profile-form button { grid-column: auto; }
   .profile-head { align-items: flex-start; flex-direction: column; padding: 36px 18px; }
+  .detail-hero { gap: 22px; }
+  .detail-hero h1 { font-size: clamp(1.75rem, 8vw, 2.35rem); }
+  .detail-grid { margin-top: 26px; gap: 22px; }
+  .detail-main-image--landscape { aspect-ratio: auto; }
+  .detail-main-image--landscape img { width: 100%; height: auto; max-height: 70vh; }
+  .detail-main-image--portrait { max-height: 72vh; }
+  .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stats span { text-align: center; padding-inline: 6px; }
+  .inquiry-box { padding: 18px; }
+  .rich-text { font-size: .98rem; line-height: 1.7; }
+  .rich-text h2 { font-size: 1.45rem; }
+  .rich-text h3 { font-size: 1.2rem; }
+  .brand-hero-content h1 { font-size: clamp(2rem, 12vw, 3rem); overflow-wrap: anywhere; }
 }
 
 @media (max-width: 560px) {
   .hero { padding-left: 18px; padding-right: 18px; }
   .brand-hero { padding: 18px 14px 0; background: linear-gradient(180deg, #061d16 0%, #08261e 58%, #f7faf9 58%); }
-  .brand-hero-media img { aspect-ratio: 16 / 8.8; object-position: center; }
+  .brand-hero-media img { width: 100%; height: auto; aspect-ratio: auto; object-fit: contain; }
   .brand-hero-content { margin-top: -18px; padding: 18px; }
   .quick-search-wrap { padding: 20px 14px 34px; }
   .quick-search-panel { grid-template-columns: 1fr; }
@@ -586,6 +606,12 @@ td a { color: var(--green); font-weight: 800; }
   .form-actions { position: static; background: transparent; }
   .auth-card { padding: 20px; }
   table { min-width: 620px; }
+  .section-head h1, .section-head h2 { overflow-wrap: anywhere; }
+  .property-detail { padding-left: 14px; padding-right: 14px; }
+  .detail-main-image { border-radius: 6px; }
+  .detail-main-image--portrait { aspect-ratio: 4 / 5; }
+  .gallery-grid--landscape, .gallery-grid--portrait { grid-template-columns: 1fr; }
+  .site-footer { padding: 22px 18px; }
 }
 
 @media (max-width: 420px) {

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load property_extras %}
 {% block extra_seo %}
 <script type="application/ld+json">
 {
@@ -57,7 +58,7 @@
         <span>{{ property.bathrooms }} baths</span>
         <span>{{ property.parking_spaces }} parking</span>
       </div>
-      <div class="rich-text">{{ property.description|safe }}</div>
+      <div class="rich-text">{{ property.description|safe_description }}</div>
       {% if landscape_images or portrait_images %}
       <section class="property-gallery" aria-labelledby="property-gallery-title">
         <h2 id="property-gallery-title">Property gallery</h2>
