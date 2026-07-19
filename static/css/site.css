@@ -46,8 +46,10 @@ main { min-height: calc(100vh - 156px); }
   box-shadow: 0 8px 26px rgba(23, 32, 42, .04);
 }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.brand { font-weight: 800; font-size: 1.35rem; color: var(--green); white-space: nowrap; }
-.brand span { color: var(--gold); }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.35rem; color: var(--green); white-space: nowrap; }
+.brand img { width: 48px; height: 48px; flex: 0 0 48px; object-fit: contain; }
+.brand-name { color: var(--green); }
+.brand-name b { color: var(--gold); }
 .site-nav { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
 .site-nav a, .site-nav button { border: 0; background: transparent; color: var(--ink); font: inherit; cursor: pointer; padding: 9px 10px; border-radius: 6px; }
 .site-nav a:hover, .site-nav button:hover { background: var(--green-soft); color: var(--green); }
@@ -636,6 +638,8 @@ td a { color: var(--green); font-weight: 800; }
 
 @media (max-width: 560px) {
   .hero { padding-left: 18px; padding-right: 18px; }
+  .brand { gap: 8px; font-size: 1.2rem; }
+  .brand img { width: 42px; height: 42px; flex-basis: 42px; }
   .brand-hero { padding: 12px 10px 14px; background: #061d16; }
   .brand-hero-media img { width: 100%; height: auto; aspect-ratio: auto; object-fit: contain; }
   .brand-hero-content { margin-top: 10px; padding: 16px; }

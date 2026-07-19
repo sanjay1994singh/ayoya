@@ -43,12 +43,18 @@
   }
   </script>
   {% block extra_seo %}{% endblock %}
-  <link rel="stylesheet" href="{% static 'css/site.css' %}?v=20260719-5">
+  <link rel="icon" href="{% static 'images/favicon.ico' %}?v=1" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32.png' %}?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}?v=1">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}?v=20260719-6">
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="{% url 'home:home' %}">Ayoya <span>Group</span></a>
+      <a class="brand" href="{% url 'home:home' %}" aria-label="Ayoya Group home">
+        <img src="{% static 'images/ayoya-logo.png' %}" alt="" width="48" height="48">
+        <span class="brand-name">Ayoya <b>Group</b></span>
+      </a>
       <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
