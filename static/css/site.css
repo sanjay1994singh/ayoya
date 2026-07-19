@@ -586,6 +586,20 @@ td a { color: var(--green); font-weight: 800; }
   .rich-text { font-size: .98rem; line-height: 1.7; }
   .rich-text h2 { font-size: 1.45rem; }
   .rich-text h3 { font-size: 1.2rem; }
+  .property-grid,
+  .property-grid--landscape,
+  .property-grid--portrait {
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+  .property-card { width: 100%; min-width: 0; }
+  .property-body { min-width: 0; }
+  .property-body h3,
+  .property-summary,
+  .property-body strong {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
   .brand-hero-content h1 {
     font-size: 2rem;
     line-height: 1.08;
@@ -634,8 +648,8 @@ td a { color: var(--green); font-weight: 800; }
   .info-hero h1 { font-size: 2.7rem; }
   .hero-actions, .detail-actions, .form-actions { display: grid; grid-template-columns: 1fr; }
   .hero-actions .btn, .detail-actions .btn, .form-actions button, .form-actions .btn { width: 100%; }
-  .property-grid { grid-template-columns: 1fr; }
-  .property-grid--portrait { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .property-grid,
+  .property-grid--portrait { grid-template-columns: minmax(0, 1fr); }
   .form-layout { grid-template-columns: 1fr; }
   .span-2, .span-3, .span-4 { grid-column: auto; }
   .amenities-field > div, .amenity-checks { grid-template-columns: 1fr; }
@@ -656,6 +670,6 @@ td a { color: var(--green); font-weight: 800; }
   .brand-hero-media { border-radius: 4px; }
   .brand-hero-content { padding: 16px; }
   .brand-hero-content p { font-size: .98rem; }
-  .property-grid--portrait { grid-template-columns: 1fr; }
+  .property-grid--portrait { grid-template-columns: minmax(0, 1fr); }
   .orientation-heading { align-items: flex-start; flex-direction: column; gap: 4px; }
 }
