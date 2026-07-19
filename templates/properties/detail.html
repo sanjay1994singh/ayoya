@@ -32,7 +32,7 @@
   }
   </script>
   <div class="detail-hero">
-    {% if property.main_image %}<img src="{{ property.main_image.url }}" alt="{{ property.title }}">{% endif %}
+    {% if property.main_image %}<div class="detail-main-image detail-main-image--{{ property.image_orientation }}"><img src="{{ property.main_image.url }}" alt="{{ property.title }}"></div>{% endif %}
     <div>
       <p class="eyebrow">{{ property.get_purpose_display }} &middot; {{ property.get_property_type_display }}</p>
       <h1>{{ property.title }}</h1>
@@ -58,6 +58,21 @@
         <span>{{ property.parking_spaces }} parking</span>
       </div>
       <div class="rich-text">{{ property.description|safe }}</div>
+      {% if landscape_images or portrait_images %}
+      <section class="property-gallery" aria-labelledby="property-gallery-title">
+        <h2 id="property-gallery-title">Property gallery</h2>
+        {% if landscape_images %}
+        <div class="gallery-grid gallery-grid--landscape">
+          {% for item in landscape_images %}<figure><img src="{{ item.image.url }}" alt="{{ item.caption|default:property.title }}"><figcaption>{{ item.caption }}</figcaption></figure>{% endfor %}
+        </div>
+        {% endif %}
+        {% if portrait_images %}
+        <div class="gallery-grid gallery-grid--portrait">
+          {% for item in portrait_images %}<figure><img src="{{ item.image.url }}" alt="{{ item.caption|default:property.title }}"><figcaption>{{ item.caption }}</figcaption></figure>{% endfor %}
+        </div>
+        {% endif %}
+      </section>
+      {% endif %}
       <h2>Amenities</h2>
       <div class="chips">{% for amenity in property.amenities.all %}<span>{{ amenity.name }}</span>{% empty %}<span>No amenities added</span>{% endfor %}</div>
     </section>

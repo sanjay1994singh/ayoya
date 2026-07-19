@@ -12,6 +12,18 @@ class PropertySearchForm(forms.Form):
     max_price = forms.DecimalField(required=False, min_value=0)
     bedrooms = forms.IntegerField(required=False, min_value=0)
 
+    def clean(self):
+        cleaned_data = super().clean()
+        min_price = cleaned_data.get("min_price")
+        max_price = cleaned_data.get("max_price")
+        if min_price is not None and max_price is not None and min_price > max_price:
+            self.add_error("max_price", "Maximum price must be greater than minimum price.")
+        for field_name in ("q", "city"):
+            value = cleaned_data.get(field_name)
+            if value:
+                cleaned_data[field_name] = " ".join(value.split())[:160]
+        return cleaned_data
+
 
 class PropertyForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

@@ -15,12 +15,35 @@
     <div class="field">{{ form.bedrooms.label_tag }}{{ form.bedrooms }}</div>
     <button type="submit">Filter</button>
   </form>
-  <div class="property-grid">
-    {% for property in page_obj %}
+  {% if landscape_properties %}
+  <section class="orientation-section" aria-labelledby="landscape-properties">
+    <div class="orientation-heading">
+      <h2 id="landscape-properties">Landscape properties</h2>
+      <span>{{ landscape_properties|length }} listing{{ landscape_properties|length|pluralize }}</span>
+    </div>
+    <div class="property-grid property-grid--landscape">
+    {% for property in landscape_properties %}
       {% include "properties/_card.html" %}
-    {% empty %}
-      <p class="empty">No matching properties found.</p>
     {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+  {% if portrait_properties %}
+  <section class="orientation-section" aria-labelledby="portrait-properties">
+    <div class="orientation-heading">
+      <h2 id="portrait-properties">Portrait properties</h2>
+      <span>{{ portrait_properties|length }} listing{{ portrait_properties|length|pluralize }}</span>
+    </div>
+    <div class="property-grid property-grid--portrait">
+    {% for property in portrait_properties %}
+      {% include "properties/_card.html" %}
+    {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+  {% if not page_obj %}
+    <p class="empty">No matching properties found.</p>
+  {% endif %}
   </div>
   {% if page_obj.paginator.num_pages > 1 %}
     <nav class="pagination">

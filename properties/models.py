@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from django.utils.functional import cached_property
 
 try:
     from django_ckeditor_5.fields import CKEditor5Field
@@ -143,6 +144,17 @@ class Property(TimeStampedModel):
     def get_absolute_url(self):
         return reverse("properties:detail", kwargs={"slug": self.slug})
 
+    @cached_property
+    def image_orientation(self):
+        """Return a stable presentation hint without trusting the filename."""
+        if not self.main_image:
+            return "landscape"
+        try:
+            width, height = self.main_image.width, self.main_image.height
+            return "portrait" if height > width else "landscape"
+        except (FileNotFoundError, OSError, ValueError):
+            return "landscape"
+
 
 class PropertyImage(TimeStampedModel):
     property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name="images")
@@ -155,6 +167,13 @@ class PropertyImage(TimeStampedModel):
 
     def __str__(self):
         return f"{self.property} image"
+
+    @cached_property
+    def image_orientation(self):
+        try:
+            return "portrait" if self.image.height > self.image.width else "landscape"
+        except (FileNotFoundError, OSError, ValueError):
+            return "landscape"
 
 
 class Inquiry(TimeStampedModel):

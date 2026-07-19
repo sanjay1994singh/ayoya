@@ -44,13 +44,17 @@
         <h2>Featured properties</h2>
         <a href="{% url 'properties:list' %}">View all</a>
     </div>
-    <div class="property-grid">
-        {% for property in featured %}
+    <div class="property-grid property-grid--landscape">
+        {% for property in featured_landscape %}
         {% include "properties/_card.html" %}
-        {% empty %}
-        <p class="empty">Add featured properties from admin or your dashboard to show them here.</p>
         {% endfor %}
     </div>
+    {% if featured_portrait %}
+    <div class="property-grid property-grid--portrait property-grid-spaced">
+        {% for property in featured_portrait %}{% include "properties/_card.html" %}{% endfor %}
+    </div>
+    {% endif %}
+    {% if not featured %}<p class="empty">Add featured properties from admin or your dashboard to show them here.</p>{% endif %}
 </section>
 
 <section class="section muted">
@@ -74,12 +78,16 @@
         <h2>Latest listings</h2>
         <a href="{% url 'properties:list' %}">Browse all</a>
     </div>
-    <div class="property-grid">
-        {% for property in latest %}
+    <div class="property-grid property-grid--landscape">
+        {% for property in latest_landscape %}
         {% include "properties/_card.html" %}
-        {% empty %}
-        <p class="empty">No published listings yet.</p>
         {% endfor %}
     </div>
+    {% if latest_portrait %}
+    <div class="property-grid property-grid--portrait property-grid-spaced">
+        {% for property in latest_portrait %}{% include "properties/_card.html" %}{% endfor %}
+    </div>
+    {% endif %}
+    {% if not latest %}<p class="empty">No published listings yet.</p>{% endif %}
 </section>
 {% endblock %}

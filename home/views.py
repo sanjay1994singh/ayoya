@@ -6,12 +6,16 @@ from properties.models import Category, Property
 
 
 def home(request):
-    featured = Property.objects.filter(status=Property.Status.PUBLISHED, is_featured=True).select_related("category", "owner")[:6]
-    latest = Property.objects.filter(status=Property.Status.PUBLISHED).select_related("category", "owner")[:9]
+    featured = list(Property.objects.filter(status=Property.Status.PUBLISHED, is_featured=True).select_related("category", "owner")[:6])
+    latest = list(Property.objects.filter(status=Property.Status.PUBLISHED).select_related("category", "owner")[:9])
     categories = Category.objects.filter(is_active=True)[:8]
     context = {
         "featured": featured,
+        "featured_portrait": [item for item in featured if item.image_orientation == "portrait"],
+        "featured_landscape": [item for item in featured if item.image_orientation == "landscape"],
         "latest": latest,
+        "latest_portrait": [item for item in latest if item.image_orientation == "portrait"],
+        "latest_landscape": [item for item in latest if item.image_orientation == "landscape"],
         "categories": categories,
         "title": "Ayoya Realestate - Buy, Sell, Rent Properties",
         "meta_description": "AYOYA GROUP is your trusted real estate channel partner for residential plots, commercial plots, flats, and investment properties in Vrindavan, Mathura, Barsana, Goverdhan, and Radha Kund.",

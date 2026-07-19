@@ -46,6 +46,7 @@ def property_list(request, slug=None):
     properties, form, category = filtered_properties(request, slug)
     paginator = Paginator(properties, 12)
     page_obj = paginator.get_page(request.GET.get("page"))
+    page_properties = list(page_obj.object_list)
     title = f"{category.name} Properties" if category else "Properties"
     meta_description = (
         f"Browse verified {category.name.lower()} listings on Ayoya Realestate with prices, locations, amenities, owners, and agents."
@@ -57,6 +58,8 @@ def property_list(request, slug=None):
         "properties/list.html",
         {
             "page_obj": page_obj,
+            "portrait_properties": [item for item in page_properties if item.image_orientation == "portrait"],
+            "landscape_properties": [item for item in page_properties if item.image_orientation == "landscape"],
             "form": form,
             "category": category,
             "title": title,
@@ -85,6 +88,7 @@ def property_detail(request, slug):
         messages.success(request, "Your inquiry has been sent.")
         return redirect(property_obj.get_absolute_url())
     is_favorite = request.user.is_authenticated and Favorite.objects.filter(user=request.user, property=property_obj).exists()
+    gallery_images = list(property_obj.images.all())
     return render(
         request,
         "properties/detail.html",
@@ -93,6 +97,8 @@ def property_detail(request, slug):
             "inquiry_form": inquiry_form,
             "review_form": review_form,
             "is_favorite": is_favorite,
+            "portrait_images": [item for item in gallery_images if item.image_orientation == "portrait"],
+            "landscape_images": [item for item in gallery_images if item.image_orientation == "landscape"],
             "title": property_obj.meta_title or property_obj.title,
             "meta_description": property_obj.meta_description,
             "meta_keywords": f"{property_obj.title}, {property_obj.city} property, {property_obj.locality}, {property_obj.get_purpose_display()}, Ayoya Realestate",

@@ -1,5 +1,5 @@
-<article class="property-card">
-  <a href="{{ property.get_absolute_url }}" class="property-media">
+<article class="property-card property-card--{{ property.image_orientation }}">
+  <a href="{{ property.get_absolute_url }}" class="property-media property-media--{{ property.image_orientation }}">
     {% if property.main_image %}
       <img src="{{ property.main_image.url }}" alt="{{ property.title }}">
     {% else %}
@@ -10,7 +10,7 @@
   <div class="property-body">
     <p class="property-meta">{{ property.get_purpose_display }} &middot; {{ property.city }}</p>
     <h3><a href="{{ property.get_absolute_url }}">{{ property.title }}</a></h3>
-    <p>{{ property.short_description|default:property.address|truncatewords:16 }}</p>
+    <p class="property-summary">{{ property.short_description|default:property.description|striptags|default:property.address|truncatewords:24 }}</p>
     <div class="card-facts">
       {% if property.area_sqft %}<span>{{ property.area_sqft }} sqft</span>{% endif %}
       {% if property.bedrooms %}<span>{{ property.bedrooms }} beds</span>{% endif %}
