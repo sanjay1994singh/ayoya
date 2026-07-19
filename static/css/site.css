@@ -583,13 +583,33 @@ td a { color: var(--green); font-weight: 800; }
   .rich-text h2 { font-size: 1.45rem; }
   .rich-text h3 { font-size: 1.2rem; }
   .brand-hero-content h1 { font-size: clamp(2rem, 12vw, 3rem); overflow-wrap: anywhere; }
+  .brand-hero {
+    padding: 16px 14px 0;
+    background: linear-gradient(180deg, #061d16 0%, #08261e 54%, #f7faf9 54%);
+  }
+  .brand-hero-media {
+    width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, .28);
+  }
+  .brand-hero-media img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
+    object-position: center;
+  }
+  .brand-hero-content {
+    width: 100%;
+    margin: 14px auto 0;
+  }
 }
 
 @media (max-width: 560px) {
   .hero { padding-left: 18px; padding-right: 18px; }
-  .brand-hero { padding: 18px 14px 0; background: linear-gradient(180deg, #061d16 0%, #08261e 58%, #f7faf9 58%); }
+  .brand-hero { padding: 12px 10px 0; background: linear-gradient(180deg, #061d16 0%, #08261e 43%, #f7faf9 43%); }
   .brand-hero-media img { width: 100%; height: auto; aspect-ratio: auto; object-fit: contain; }
-  .brand-hero-content { margin-top: -18px; padding: 18px; }
+  .brand-hero-content { margin-top: 12px; padding: 18px; }
   .quick-search-wrap { padding: 20px 14px 34px; }
   .quick-search-panel { grid-template-columns: 1fr; }
   .quick-search-panel button { width: 100%; }
@@ -616,6 +636,10 @@ td a { color: var(--green); font-weight: 800; }
 }
 
 @media (max-width: 420px) {
+  .brand-hero { padding-left: 8px; padding-right: 8px; }
+  .brand-hero-media { border-radius: 4px; }
+  .brand-hero-content { padding: 16px; }
+  .brand-hero-content p { font-size: .98rem; }
   .property-grid--portrait { grid-template-columns: 1fr; }
   .orientation-heading { align-items: flex-start; flex-direction: column; gap: 4px; }
 }
