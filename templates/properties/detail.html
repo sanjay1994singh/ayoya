@@ -32,8 +32,8 @@
     "datePosted": "{{ property.created_at|date:'c' }}"
   }
   </script>
-  <div class="detail-hero">
-    {% if property.main_image %}<div class="detail-main-image detail-main-image--{{ property.image_orientation }}"><img src="{{ property.main_image.url }}" alt="{{ property.title }}"></div>{% endif %}
+  <div class="detail-hero detail-hero--{{ property.image_orientation }}">
+    {% if property.main_image %}<div class="detail-main-image detail-main-image--{{ property.image_orientation }}"><img src="{{ property.main_image.url }}" alt="{{ property.title }}" width="{{ property.main_image.width }}" height="{{ property.main_image.height }}"></div>{% endif %}
     <div>
       <p class="eyebrow">{{ property.get_purpose_display }} &middot; {{ property.get_property_type_display }}</p>
       <h1>{{ property.title }}</h1>
