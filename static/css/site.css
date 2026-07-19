@@ -161,7 +161,7 @@ label { font-weight: 800; font-size: .9rem; color: #21313c; }
   position: relative;
   z-index: 2;
   width: min(100%, 1180px);
-  margin: -34px auto 0;
+  margin: 24px auto 0;
   display: grid;
   gap: 10px;
   padding: 26px;
